@@ -1,21 +1,49 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Axios } from "axios";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
+  const router = useRouter();
   //what data need to accuumlate
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
 
-  const onLogin = async () => {};
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const onLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/users/login", user);
+      console.log("Login Successfull", response.data);
+
+      toast.success("login succesfull");
+
+      router.push("/profile");
+    } catch (error: any) {
+      console.log("login failed", error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-slate-950 via-indigo-950 to-slate-900 px-4 py-10">
       <h1 className="text-3xl font-bold tracking-tight text-white mb-6 capitalize">
-        LOGIN
+        {loading ? "Proccesing" : "Login"}
       </h1>
       <hr />
 
@@ -30,7 +58,7 @@ export default function LoginPage() {
         type="text"
         id="email"
         value={user.email}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
+        onChange={(e) => setUser({ ...user, email: e.target.value })}
         placeholder="email"
       />
 
@@ -53,7 +81,7 @@ export default function LoginPage() {
         onClick={onLogin}
         className="w-64 mt-6 px-5 py-3 bg-linear-to-r from-indigo-500 via-purple-500 to-violet-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer"
       >
-        Login Here
+        {buttonDisabled ? "Cant" : "Login"}
       </button>
       <hr className="w-64 border-white/20 my-5" />
       <Link
