@@ -41,55 +41,67 @@ export default function LoginPage() {
     }
   }, [user]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-slate-950 via-indigo-950 to-slate-900 px-4 py-10">
-      <h1 className="text-3xl font-bold tracking-tight text-white mb-6 capitalize">
-        {loading ? "Proccesing" : "Login"}
-      </h1>
-      <hr />
-
-      <label
-        className="w-64 text-sm font-medium text-gray-300 mb-1 mt-3 capitalize"
-        htmlFor="email"
-      >
-        email
-      </label>
-      <input
-        className="w-64 px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-gray-400 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400 transition-all duration-200"
-        type="text"
-        id="email"
-        value={user.email}
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-        placeholder="email"
-      />
-
-      <label
-        className="w-64 text-sm font-medium text-gray-300 mb-1 mt-3 capitalize"
-        htmlFor="password"
-      >
-        password
-      </label>
-      <input
-        className="w-64 px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-gray-400 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400 transition-all duration-200"
-        type="password"
-        id="password"
-        value={user.password}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-        placeholder="password"
-      />
-
-      <button
-        onClick={onLogin}
-        className="w-64 mt-6 px-5 py-3 bg-linear-to-r from-indigo-500 via-purple-500 to-violet-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer"
-      >
-        {buttonDisabled ? "Cant" : "Login"}
-      </button>
-      <hr className="w-64 border-white/20 my-5" />
-      <Link
-        href="/signup"
-        className="text-sm text-indigo-300 hover:text-white hover:underline transition-colors duration-200 mt-2"
-      >
-        New User? Signup
-      </Link>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#08111f] px-4 py-10 text-white">
+      <div className="absolute left-0 top-1/4 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-indigo-500/15 blur-3xl" />
+      <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.06] p-7 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-9">
+        <div className="mb-8 flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-300 text-base font-black text-slate-950">
+            s
+          </span>
+          <span className="text-lg font-semibold tracking-tight">SENTRIQ</span>
+        </div>
+        <h1 className="text-3xl font-semibold tracking-tight">
+          {loading ? "Signing you in" : "Welcome back"}
+        </h1>
+        <p className="mt-2 text-sm leading-6 text-slate-400">
+          Sign in to continue to your account.
+        </p>
+        <div className="mt-8 space-y-5">
+          <label
+            className="block text-sm font-medium text-slate-300"
+            htmlFor="email"
+          >
+            Email address
+          </label>
+          <input
+            className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-white outline-none transition-all placeholder:text-slate-500 focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10"
+            type="text"
+            id="email"
+            value={user.email}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            placeholder="you@example.com"
+          />
+          <label
+            className="block text-sm font-medium text-slate-300"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <input
+            className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-white outline-none transition-all placeholder:text-slate-500 focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10"
+            type="password"
+            id="password"
+            value={user.password}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            placeholder="Enter your password"
+          />
+          <button
+            onClick={onLogin}
+            className="mt-2 w-full rounded-xl bg-cyan-300 px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-300/10 transition-all hover:bg-cyan-200 hover:shadow-cyan-300/20 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {buttonDisabled ? "Enter your details" : "Login"}
+          </button>
+        </div>
+        <div className="my-7 border-t border-white/10" />
+        <Link
+          href="/signup"
+          className="text-sm text-slate-400 transition-colors hover:text-cyan-300"
+        >
+          New here?{" "}
+          <span className="font-medium text-cyan-300">Create an account</span>
+        </Link>
+      </div>
     </div>
   );
 }

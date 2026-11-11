@@ -2,17 +2,24 @@ export const instant = false;
 export default async function UserProfile({ params }: any) {
   const { id } = await params;
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-linear-to-br from-slate-950 via-indigo-950 to-slate-900 px-4 py-10">
-      <div className="w-80 p-8 bg-white/5 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl">
-        <h1 className="text-3xl font-bold tracking-tight text-white text-center mb-6">
-          Profile
-        </h1>
-
-        <hr className="border-white/20 mb-6" />
-
-        <p className="text-gray-300 text-center text-sm">
-          Welcome to your profile page {id}
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#08111f] px-4 py-10 text-white">
+      <div className="absolute left-0 top-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div className="relative w-full max-w-lg rounded-3xl border border-white/10 bg-white/[0.06] p-8 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-10">
+        <p className="text-sm font-semibold tracking-tight text-cyan-300">
+          SENTRIQ
         </p>
+        <h1 className="mt-8 text-3xl font-semibold tracking-tight">
+          Profile details
+        </h1>
+        <p className="mt-2 text-sm text-slate-400">
+          A closer look at this account.
+        </p>
+        <div className="mt-8 rounded-2xl border border-white/10 bg-slate-950/30 p-5">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
+            Username
+          </p>
+          <p className="mt-3 break-all text-sm font-medium text-white">{id}</p>
+        </div>
       </div>
     </div>
   );
